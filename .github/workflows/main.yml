@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: 12
          
-    
+      - name: Installing dependencies
         uses: Borales/actions-yarn@v2.3.0
         with:
           cmd: install 
@@ -36,7 +36,7 @@ jobs:
          
          
       - name: installing surge
-        run: npm install --global surge
+        run: npm install -g surge
       
       - name: deployment surge
         run: surge ./build muhammad-abdullah-habib-class02.surge.sh --token ${{secrets.SURGE__TOKEN}}
