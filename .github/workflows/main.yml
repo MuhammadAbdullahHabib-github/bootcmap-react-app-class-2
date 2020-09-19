@@ -1,6 +1,7 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Deploy React App to Surge
+
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -20,25 +21,24 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Setup Node.js environment
+      - name: Install NodeJS
         uses: actions/setup-node@v2-beta
         with:
-         version: 12
+          node-version: 12
          
-      - name: GitHub Action for Yarn
+    
         uses: Borales/actions-yarn@v2.3.0
         with:
-         # Yarn command
-         cmd:  install 
+          cmd: install 
          
       - name: Creating build
         run: yarn build   
          
          
       - name: installing surge
-        run: npm install -g surge
+        run: npm install --global surge
       
       - name: deployment surge
-        run: surge ./ http://muhammad-abdullah-habib-class02.surge.sh --token ${{secrets.SURGE__TOKEN}}
+        run: surge ./build muhammad-abdullah-habib-class02.surge.sh --token ${{secrets.SURGE__TOKEN}}
         
  
